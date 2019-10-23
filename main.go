@@ -26,7 +26,15 @@ func GetPeopleEndpoint(w http.ResponseWriter, req *http.Request) {
 }
 
 func GetPersonEndpoint(w http.ResponseWriter, req *http.Request) {
-
+  params := mux.Vars(req)
+  for _, item := range people {
+    if item.ID == params["id"] {
+      json.NewEncoder(w).Encode(item)
+      return
+    }
+  }
+  json.NewEncoder(w).Encode(&Person{})
+  return
 }
 
 func CreatePersonEndpoint(w http.ResponseWriter, req *http.Request) {
