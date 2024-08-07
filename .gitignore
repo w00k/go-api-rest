@@ -1,0 +1,34 @@
+# Compiled binaries
+*.exe
+*.so
+*.dll
+*.dylib
+
+# Build artifacts
+*.a
+*.o
+*.h
+*.c
+*.cpp
+*.s
+*.S
+
+# Test files
+*_test.go
+*_test.go.s
+
+# Coverage files
+*.coverprofile
+*.cover
+
+# Go build cache
+/go/pkg/mod/cache/download
+/go/pkg/mod/cache/vcs
+
+# IDE-specific files
+.idea
+*.iml
+*.ipr
+*.iws
+.vscode
+.DS_Store
