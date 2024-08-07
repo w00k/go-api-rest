@@ -6,8 +6,12 @@ import (
 	"log"
 	"os"
 
+	docs "go-api-rest/src/cmd/docs"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -21,11 +25,19 @@ func main() {
 	PORT := os.Getenv("PORT")
 
 	r := gin.Default() // Create a default Gin router
+	docs.SwaggerInfo.BasePath = "/api/v1/go-api-rest-world-time"
 
-	// Define a route for the root path ("/")
-	r.GET("/timezone", handler.TimezoneHandler)
+	v1 := r.Group("/api/v1")
+	{
+		eg := v1.Group("/go-api-rest-world-time")
+		{
+			// Define endpoint
+			eg.GET("/timezone", handler.TimezoneHandler)
+		}
+	}
 
 	// Start the server on port
 	fmt.Println("Start go-api-rest in port " + PORT)
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run(PORT)
 }

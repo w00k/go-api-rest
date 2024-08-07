@@ -1,0 +1,43 @@
+definitions:
+  model.Exception:
+    properties:
+      code:
+        type: string
+      error:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /timezone:
+    get:
+      consumes:
+      - application/json
+      description: listing of all timezones from the backend.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of timezones
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.Exception'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/model.Exception'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.Exception'
+      summary: listing of all timezones.
+      tags:
+      - example
+swagger: "2.0"
